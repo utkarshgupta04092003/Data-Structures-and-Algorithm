@@ -32,11 +32,8 @@ Note: If the number x is not found in the array just
 return both index as -1.
 
  
-
-Expected Time Complexity: O(N)
+Expected Time Complexity: O(logN)
 Expected Auxiliary Space: O(1).
-
- 
 
 Constraints:
 1 ≤ N ≤ 107
@@ -48,32 +45,63 @@ Constraints:
 
 class GFG
 {
+    long findFirst(long arr[],int n,int x){
+        int left = 0;
+        int right = n-1;
+        
+        while(left <= right){
+            int mid = (left+right)/2;
+            
+            if((mid == 0 || arr[mid-1] != arr[mid]) && arr[mid] == x )
+                return mid;
+                
+            else if(arr[mid] >= x){
+                right = mid-1;
+            }
+            else{
+                left = mid+1;
+            }
+        }
+        
+        return -1;
+    }
+    
+    long findLast(long arr[],int n,int x){
+        int left = 0;
+        int right = n-1;
+        
+        while(left <= right){
+            int mid = (left+right)/2;
+            
+            if((mid == n-1 || arr[mid] != arr[mid+1]) && arr[mid] == x )
+                return mid;
+                
+            else if(arr[mid] > x){
+                right = mid-1;
+            }
+            else{
+                left = mid+1;
+            }
+        }
+        
+        return -1;
+    }
     ArrayList<Long> find(long arr[], int n, int x)
     {
         // code here
-        long first = -1;
-        long last = -1;
         
-        for(int i = 0;i<n;i++){
-            if(arr[i] == x){
-                first = i;
-                break;
-            }
-        }
-        for(int i = n-1;i>=0;i--){
-            if(arr[i] == x){
-                last = i;
-                break;
-            }
-        }
-        ArrayList<Long> res = new ArrayList<>();
-        res.add(first);
-        res.add(last);
+        int key = x;
+        long firstOccr = (long)findFirst(arr,n,key);
+        long lastOccr = (long)findLast(arr,n,key);
+        
+        ArrayList<Long> res = new ArrayList<Long>();
+        
+        res.add(firstOccr);
+        res.add(lastOccr);
         return res;
+        
     }
 }
-
-
 
 
 
