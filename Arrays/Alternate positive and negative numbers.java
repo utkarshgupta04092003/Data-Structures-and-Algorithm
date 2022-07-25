@@ -6,6 +6,7 @@ negative numbers without changing the relative order of
 positive and negative numbers.
 Note: Array should start with positive number.
  
+Note - Order should be same as input order.
 
 Example 1:
 
